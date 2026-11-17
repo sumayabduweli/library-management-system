@@ -30,6 +30,15 @@ DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 if os.environ.get('RENDER_EXTERNAL_HOSTNAME'):
     ALLOWED_HOSTS.append(os.environ['RENDER_EXTERNAL_HOSTNAME'])
+if os.environ.get('VERCEL_URL'):
+    ALLOWED_HOSTS.append(os.environ['VERCEL_URL'])
+if os.environ.get('VERCEL_BRANCH_URL'):
+    ALLOWED_HOSTS.append(os.environ['VERCEL_BRANCH_URL'])
+
+CSRF_TRUSTED_ORIGINS = []
+for deployment_host in (os.environ.get('VERCEL_URL'), os.environ.get('VERCEL_BRANCH_URL')):
+    if deployment_host:
+        CSRF_TRUSTED_ORIGINS.append(f'https://{deployment_host}')
 
 
 # Application definition
@@ -136,7 +145,7 @@ STORAGES = {
     'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
     # Bootstrap's bundled JS references an optional source map that is not included.
     # Non-manifest storage lets collectstatic deploy without requiring that map.
-    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage'},
+    'staticfiles': {'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'},
 }
 
 LOGIN_REDIRECT_URL = '/'
