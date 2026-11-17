@@ -16,14 +16,34 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import get_user_model
+from django.db import connection
+import logging
 from django.urls import path, include
 from book.views import index_view, librarian_view, member_view, book_view, book_copy_view, borrowing_view, payment_view, add_member_view, add_librarian_view, add_book_view, add_book_copy_view, add_borrowing_view, add_payment_view, edit_member_view, edit_librarian_view, edit_book_view, edit_book_copy_view, edit_borrowing_view, edit_payment_view, delete_member_view,delete_librarian_view, delete_book_view, delete_book_copy_view, delete_borrowing_view, delete_payment_view, sign_up_view
+
+logger = logging.getLogger(__name__)
+
+class DiagnosticLoginView(LoginView):
+    def form_invalid(self, form):
+        username = form.cleaned_data.get('username', '')
+        password = form.cleaned_data.get('password', '')
+        user = get_user_model().objects.filter(username=username).first()
+        logger.warning(
+            'Login diagnostic: db_vendor=%s db_name=%s username_found=%s password_matches=%s active=%s',
+            connection.vendor,
+            connection.settings_dict.get('NAME'),
+            bool(user),
+            user.check_password(password) if user else False,
+            user.is_active if user else False,
+        )
+        return super().form_invalid(form)
 
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('admin/', admin.site.urls),
-    path('login/', LoginView.as_view(template_name='registrations/login.html'), name='login_page'),
+    path('login/', DiagnosticLoginView.as_view(template_name='registrations/login.html'), name='login_page'),
     path('', index_view, name='index_page'),
     path('librarian/', librarian_view, name='librarian_page'),
     path('member/', member_view, name='member_page'),
