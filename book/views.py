@@ -1,10 +1,11 @@
 
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .forms import MemberForm, LibrarianForm, BookForm, BookCopyForm, BorrowingForm, PaymentForm
 from .models import Member, Librarian, Book, BookCopy, Borrowing, Payment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 
@@ -188,13 +189,13 @@ def add_payment_view(request):
 @login_required
 def edit_member_view(request, member_id):
     message = ''
-    member = Member.objects.get(id=member_id)
+    member = get_object_or_404(Member, id=member_id)
     if request.method == 'POST':
         member_form = MemberForm(request.POST, instance=member)
 
         if member_form.is_valid():
             member_form.save()
-            message = 'Member updated successfully!'
+            return redirect('add_member_page')
         else:
             message = 'form has invalid data.'
     else:
@@ -211,13 +212,13 @@ def edit_member_view(request, member_id):
 @login_required
 def edit_librarian_view(request, librarian_id):
     message = ''
-    librarian = Librarian.objects.get(id=librarian_id)
+    librarian = get_object_or_404(Librarian, id=librarian_id)
     if request.method == 'POST':
         librarian_form = LibrarianForm(request.POST, instance=librarian)
 
         if librarian_form.is_valid():
             librarian_form.save()
-            message = 'Librarian updated successfully!'
+            return redirect('add_librarian_page')
         else:
             message = 'form has invalid data.'
     else:
@@ -234,13 +235,13 @@ def edit_librarian_view(request, librarian_id):
 @login_required
 def edit_book_view(request, book_id):
     message = ''
-    book = Book.objects.get(id=book_id)
+    book = get_object_or_404(Book, id=book_id)
     if request.method == 'POST':
         book_form = BookForm(request.POST, instance=book)
 
         if book_form.is_valid():
             book_form.save()
-            message = 'Book updated successfully!'
+            return redirect('add_book_page')
         else:
             message = 'form has invalid data.'
     else:
@@ -256,13 +257,13 @@ def edit_book_view(request, book_id):
 @login_required
 def edit_book_copy_view(request, book_copy_id):
     message = ''
-    book_copy = BookCopy.objects.get(copy_id=book_copy_id)
+    book_copy = get_object_or_404(BookCopy, copy_id=book_copy_id)
     if request.method == 'POST':
         book_copy_form = BookCopyForm(request.POST, instance=book_copy)
 
         if book_copy_form.is_valid():
             book_copy_form.save()
-            message = 'Book copy updated successfully!'
+            return redirect('add_book_copy_page')
         else:   
             message = 'form has invalid data.'
 
@@ -279,13 +280,13 @@ def edit_book_copy_view(request, book_copy_id):
 @login_required
 def edit_borrowing_view(request, borrowing_id):
     message = ''
-    borrowing = Borrowing.objects.get(id=borrowing_id)
+    borrowing = get_object_or_404(Borrowing, id=borrowing_id)
     if request.method == 'POST':
-        borrowing_form = BorrowingForm(instance=borrowing)
+        borrowing_form = BorrowingForm(request.POST, instance=borrowing)
 
         if borrowing_form.is_valid():
             borrowing_form.save()
-            message = 'Borrowing updated successfully!'
+            return redirect('add_borrowing_page')
         else:
             message = 'form has invalid data.'
     else:
@@ -301,13 +302,13 @@ def edit_borrowing_view(request, borrowing_id):
 @login_required
 def edit_payment_view(request, payment_id):
     message = ''
-    payment = Payment.objects.get(id=payment_id)
+    payment = get_object_or_404(Payment, id=payment_id)
     if request.method == 'POST':
-        payment_form = PaymentForm(instance=payment)
+        payment_form = PaymentForm(request.POST, instance=payment)
 
         if payment_form.is_valid():
             payment_form.save()
-            message = 'Payment updated successfully!'
+            return redirect('add_payment_page')
         else:
             message = 'form has invalid data.'
     else:
@@ -322,38 +323,44 @@ def edit_payment_view(request, payment_id):
 
 #delete views
 @login_required
+@require_POST
 def delete_member_view(request, member_id):
-    member = Member.objects.get(id=member_id)
+    member = get_object_or_404(Member, id=member_id)
     member.delete()
     return redirect('add_member_page')
 
 @login_required
+@require_POST
 def delete_librarian_view(request, librarian_id):
-    librarian = Librarian.objects.get(id=librarian_id)
+    librarian = get_object_or_404(Librarian, id=librarian_id)
     librarian.delete()
     return redirect('add_librarian_page')
 
 @login_required
+@require_POST
 def delete_book_view(request, book_id):
-    book = Book.objects.get(id=book_id)
+    book = get_object_or_404(Book, id=book_id)
     book.delete()
     return redirect('add_book_page')
 
 @login_required
+@require_POST
 def delete_book_copy_view(request, book_copy_id):
-    book_copy = BookCopy.objects.get(copy_id=book_copy_id)
+    book_copy = get_object_or_404(BookCopy, copy_id=book_copy_id)
     book_copy.delete()
     return redirect('add_book_copy_page')
 
 @login_required
+@require_POST
 def delete_borrowing_view(request, borrowing_id):
-    borrowing = Borrowing.objects.get(id=borrowing_id)
+    borrowing = get_object_or_404(Borrowing, id=borrowing_id)
     borrowing.delete()
     return redirect('add_borrowing_page')
 
 @login_required
+@require_POST
 def delete_payment_view(request, payment_id):
-    payment = Payment.objects.get(id=payment_id)
+    payment = get_object_or_404(Payment, id=payment_id)
     payment.delete()
     return redirect('add_payment_page')  
 
