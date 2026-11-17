@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Library Management System
 
 ## Group Members
@@ -50,3 +51,6 @@ if they need Django admin access and you did not share an existing database.
 
 This setup is for local development. Do not deploy the included Django settings to a
 public server as-is.
+=======
+# library-management-system
+>>>>>>> origin/main
