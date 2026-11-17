@@ -1,0 +1,47 @@
+﻿{% extends './base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Manage Book Copies{% endblock %}
+{% block content %}
+<h1>Manage Book Copies</h1>
+        <button type="button" class="btn bg-gradient-dark" onclick="document.getElementById('add-book-copy-dialog').showModal()">Add Book Copy</button>
+<dialog id="add-book-copy-dialog" class="add-form-dialog" {% if book_copy_form.errors %}open{% endif %}>
+  <div class="add-form-dialog-header">
+    <h2>Add a Book Copy</h2>
+    <button type="button" class="btn btn-link p-0" onclick="document.getElementById('add-book-copy-dialog').close()" aria-label="Close form">Close</button>
+  </div>
+  <form method="POST">
+        {% csrf_token %}
+        {{ book_copy_form|crispy }}
+        <button type="submit">Save Book Copy</button>
+    </form>
+</dialog>
+    {% if message %} 
+         {{ message }}
+    {% endif %} 
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Copy ID</th>
+                <th scope="col">Book id</th>
+                <th scope="col">Edition</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book_copy in book_copies %}
+            <tr>
+                <td>{{ book_copy.copy_id }}</td>
+                <td>{{ book_copy.book_id.pk }}</td>
+                <td>{{ book_copy.edition }}</td>
+                <td>{{ book_copy.get_status_display }}</td>
+                <td><a href="{% url 'edit_book_copy_page' book_copy.pk %}" aria-label="Edit book copy" title="Edit"><i class="material-symbols-rounded">edit</i></a></td>
+                <td><a href="{% url 'delete_book_copy_page' book_copy.pk %}" aria-label="Delete book copy" title="Delete" onclick="return confirm('Are you sure you want to delete this book copy?')"><i class="material-symbols-rounded text-danger">delete</i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<p><a href="{% url 'book_copy_page' %}">Back to book copies</a></p>
+{% endblock %}
+
+

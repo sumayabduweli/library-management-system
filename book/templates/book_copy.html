@@ -1,0 +1,44 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block title %}Book Copies | Library Management System{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/book_copy.css' %}">{% endblock %}
+{% block content %}
+<div class="library-page">
+
+    <header>
+        <h2>BOOK COPY</h2>
+        <a class="btn bg-gradient-dark text-white mb-3" href="{% url 'add_book_copy_page' %}">Manage Book Copies</a>
+        
+    </header>
+    
+        <section class="copy-list">
+            <h2>Copy List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Copy-Id</th>
+                        <th>Book-Id</th>
+                        <th>Edition</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book_copy in book_copies %}
+                    <tr>
+                        <td>{{ book_copy.copy_id }}</td>
+                        <td>{{ book_copy.book_id.book_title }}</td>
+                        <td>{{ book_copy.edition }}</td>
+                        <td>{{ book_copy.get_status_display }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4">No book copies found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </section>
+    
+    
+
+</div>
+{% endblock %}

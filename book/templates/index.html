@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Library Management System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}?v=20261110-3">
+{% endblock %}
+
+{% block content %}
+<div class="library-home">
+<h1>Welcome to Our Library</h1>
+<p>Welcome to our Library Management System!</p>
+
+<section class="library-dashboard" aria-labelledby="dashboard-title">
+    <h2 id="dashboard-title">Dashboard</h2>
+    <div class="dashboard-cards">
+        <article class="dashboard-card dashboard-card-members">
+            <span class="dashboard-icon material-symbols-rounded" aria-hidden="true">groups</span>
+            <div class="dashboard-card-content">
+                <span class="dashboard-label">Members</span>
+                <strong>{{ total_members }}</strong>
+            </div>
+            <span class="dashboard-description">Registered library members</span>
+        </article>
+        <article class="dashboard-card dashboard-card-staff">
+            <span class="dashboard-icon material-symbols-rounded" aria-hidden="true">badge</span>
+            <div class="dashboard-card-content">
+                <span class="dashboard-label">Staff</span>
+                <strong>{{ total_librarians }}</strong>
+            </div>
+            <span class="dashboard-description">Registered librarians</span>
+        </article>
+        <article class="dashboard-card dashboard-card-books">
+            <span class="dashboard-icon material-symbols-rounded" aria-hidden="true">menu_book</span>
+            <div class="dashboard-card-content">
+                <span class="dashboard-label">Books</span>
+                <strong>{{ total_books }}</strong>
+            </div>
+            <span class="dashboard-description">{{ total_copies }} copies &middot; {{ available_copies }} available</span>
+        </article>
+        <article class="dashboard-card dashboard-card-borrowings">
+            <span class="dashboard-icon material-symbols-rounded" aria-hidden="true">assignment_return</span>
+            <div class="dashboard-card-content">
+                <span class="dashboard-label">Borrowing Records</span>
+                <strong>{{ total_borrowings }}</strong>
+            </div>
+            <span class="dashboard-description">Recorded book borrowings</span>
+        </article>
+        <article class="dashboard-card dashboard-card-payments">
+            <span class="dashboard-icon material-symbols-rounded" aria-hidden="true">payments</span>
+            <div class="dashboard-card-content">
+                <span class="dashboard-label">Payments</span>
+                <strong>{{ total_payments }}</strong>
+            </div>
+            <span class="dashboard-description">Recorded payment entries</span>
+        </article>
+    </div>
+</section>
+
+<h2>About the Project</h2>
+<p>
+    This project is a simple website for managing a library. It helps librarians
+    keep track of books and book copies, register members and librarians, record
+    borrowed books, and manage payments. Use the links in the sidebar to visit each page.
+</p>
+
+<h2>Sample Library Data</h2>
+<p>These books are loaded from your database and update whenever the page loads.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Copies</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in recent_books %}
+        <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.book_title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.copy_count }}</td>
+            <td>{% if not book.copy_count %}No copies{% elif book.available_copy_count %}{{ book.available_copy_count }} available{% else %}Unavailable{% endif %}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No books found in the database.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

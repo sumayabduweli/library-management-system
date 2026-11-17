@@ -1,0 +1,50 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block title %}Payments | Library Management System{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/payment.css' %}">{% endblock %}
+{% block content %}
+<div class="library-page">
+
+    <header>
+        <h2>PAYMENT</h2>
+        <a class="btn bg-gradient-dark text-white mb-3" href="{% url 'add_payment_page' %}">Manage Payments</a>
+       
+    </header>
+    
+        <section class="payment-records">
+            <h2>Records</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Payment-Id</th>
+                        <th>Borrowing-Id</th>
+                        <th>Member-Id</th>
+                        <th>Copy-Id</th>
+                        <th>Librarian-Id</th>
+                        <th>Payment-Date</th>
+                        <th>Payment-Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in payments %}
+                    <tr>
+                        <td>{{ payment.id }}</td>
+                        <td>{{ payment.borrowing_id.id }}</td>
+                        <td>{{ payment.member_id }}</td>
+                        <td>{{ payment.copy_id.copy_id }}</td>
+                        <td>{{ payment.librarian_id }}</td>
+                        <td>{{ payment.payment_date|date:'Y-m-d' }}</td>
+                        <td>{{ payment.payment_method }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="7">No payment records found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </section>
+    
+    
+
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends './base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Edit Borrowing{% endblock %}
+{% block content %}
+<main>
+        <h1>Edit Borrowing</h1>
+        {% if message %}<p>{{ message }}</p>{% endif %}
+        <form method="post">
+            {% csrf_token %}
+            {{ borrowing_form|crispy }}
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+        </form>
+        <p><a href="{% url 'add_borrowing_page' %}">Back to borrowings</a></p>
+    </main>
+{% endblock %}

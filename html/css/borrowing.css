@@ -1,0 +1,105 @@
+/* Basic styles shared by all pages */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f5;
+    color: #222;
+    margin: 20px;
+    line-height: 1.5;
+}
+
+header, main, body > h1, body > h2, body > p, body > ul, #main-div {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1, h2 {
+    color: #245b45;
+}
+
+nav {
+    background-color: #245b45;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+nav a {
+    color: white;
+    margin-right: 14px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+form, section, .dummy-data, .member-form, #Login-div {
+    background-color: white;
+    padding: 16px;
+    margin: 16px 0;
+    border: 1px solid #d5ded8;
+    border-radius: 6px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input, select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    margin: 4px 0 10px;
+}
+
+button {
+    display: block;
+    background-color: #245b45;
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    padding: 9px 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #194332;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
+    border: 1px solid #d5ded8;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #e5efe9;
+}
+
+a {
+    color: #245b45;
+}
+
+@media (max-width: 600px) {
+    body {
+        margin: 12px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 4px 10px 4px 0;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}

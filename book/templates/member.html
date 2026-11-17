@@ -1,0 +1,44 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block title %}Members | Library Management System{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/member.css' %}">{% endblock %}
+{% block content %}
+<div class="library-page">
+
+  <h2>MEMBER REGISTER</h2>
+  <a class="btn bg-gradient-dark text-white mb-3" href="{% url 'add_member_page' %}">Manage Members</a>
+
+  <div class="dummy-data">
+    <h2>REGISTER MEMBER</h2>
+    <Table>
+      <thead>
+        <tr>
+          <th>Member-Id</th>
+          <th>First-Name</th>
+          <th>Last-Name</th>
+          <th>Gender</th>
+          <th>Contact</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for member in members %}
+        <tr>
+          <td>{{ member.id }}</td>
+          <td>{{ member.firstname }}</td>
+          <td>{{ member.lastname }}</td>
+          <td>{{ member.get_gender_display }}</td>
+          <td>{{ member.contact }}</td>
+          <td>{{ member.address|default:'—' }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">No members found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </Table>
+    
+  </div>
+  
+
+</div>
+{% endblock %}

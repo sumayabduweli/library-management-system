@@ -1,0 +1,178 @@
+﻿.library-page {
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: #f4f7f5;
+    color: #222;
+}
+
+.library-page header, .library-page main, .library-page > h1, .library-page > h2, .library-page > p, .library-page > ul, .library-page #main-div {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.library-page h1, .library-page h2 {
+    color: #245b45;
+}
+
+.library-page nav {
+    background-color: #245b45;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+.library-page nav .library-page a {
+    color: white;
+    margin-right: 14px;
+    text-decoration: none;
+}
+
+.library-page nav a:hover {
+    text-decoration: underline;
+}
+
+.library-page form, .library-page section, .library-page .dummy-data, .library-page .member-form, .library-page #Login-div {
+    background-color: white;
+    padding: 16px;
+    margin: 16px 0;
+    border: 1px solid #d5ded8;
+    border-radius: 6px;
+}
+
+.library-page label {
+    display: block;
+    margin-top: 10px;
+}
+
+.library-page input, .library-page select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    margin: 4px 0 10px;
+}
+
+.library-page button {
+    display: block;
+    background-color: #245b45;
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    padding: 9px 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.library-page button:hover {
+    background-color: #194332;
+}
+
+.library-page table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.library-page th, .library-page td {
+    border: 1px solid #d5ded8;
+    padding: 8px;
+    text-align: left;
+}
+
+.library-page th {
+    background-color: #e5efe9;
+}
+
+.library-page a {
+    color: #245b45;
+}
+
+@media (max-width: 600px) {
+    .library-page {
+        margin: 12px;
+    }
+
+    .library-page nav .library-page a {
+        display: inline-block;
+        margin: 4px 10px 4px 0;
+    }
+
+    .library-page table {
+        font-size: 14px;
+    }
+}
+
+.library-page.login-page {
+    display: grid;
+    min-height: calc(100vh - 3rem);
+    place-items: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 1.5rem;
+}
+
+.login-panel {
+    width: 100%;
+    max-width: 440px !important;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 1.75rem;
+    border: 1px solid #dfe6e1;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 1rem 2.5rem rgba(31, 54, 43, 0.12);
+}
+
+.login-panel h1 {
+    margin: 0 0 1rem;
+    text-align: center;
+}
+
+.login-panel form {
+    margin: 1rem 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.login-panel .form-control,
+.login-panel input {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+.login-panel button {
+    width: 100%;
+}
+
+.login-notice {
+    text-align: center;
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    margin: 0 auto 1.25rem;
+    color: #26364a;
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.login-brand img {
+    display: block;
+    width: 56px !important;
+    height: 56px !important;
+    max-width: 56px !important;
+    max-height: 56px !important;
+    flex: 0 0 56px;
+    border-radius: 0.65rem;
+    object-fit: cover;
+}
+
+.login-signup-link {
+    margin: 0.75rem 0;
+    text-align: center;
+}

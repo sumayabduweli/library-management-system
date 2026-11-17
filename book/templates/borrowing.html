@@ -1,0 +1,48 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block title %}Borrowings | Library Management System{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/borrowing.css' %}">{% endblock %}
+{% block content %}
+<div class="library-page">
+
+    <header>
+        <h2>BORROWING</h2>
+        <a class="btn bg-gradient-dark text-white mb-3" href="{% url 'add_borrowing_page' %}">Manage Borrowings</a>
+        
+    </header>
+    
+        <section class="borrow-records">
+            <h2>Records</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Borrowing-Id</th>
+                        <th>Member-Id</th>
+                        <th>Copy-Id</th>
+                        <th>Librarian-Id</th>
+                        <th>Borrow-Date</th>
+                        <th>Return-Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for borrowing in borrowings %}
+                    <tr>
+                        <td>{{ borrowing.id }}</td>
+                        <td>{{ borrowing.member_id }}</td>
+                        <td>{{ borrowing.copy_id.copy_id }}</td>
+                        <td>{{ borrowing.librarian_id }}</td>
+                        <td>{{ borrowing.borrow_date|date:'Y-m-d' }}</td>
+                        <td>{{ borrowing.return_date|date:'Y-m-d' }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="6">No borrowing records found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </section>
+    
+    
+
+</div>
+{% endblock %}

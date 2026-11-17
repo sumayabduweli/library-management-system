@@ -1,0 +1,51 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block title %}Librarians | Library Management System{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/librarian.css' %}">{% endblock %}
+{% block content %}
+<div class="library-page">
+
+    <header>
+       <h2>LIBRARIAN</h2>
+       <a class="btn bg-gradient-dark text-white mb-3" href="{% url 'add_librarian_page' %}">Manage Librarians</a>
+       
+    </header>
+    
+        <section class="Librarian-list">
+            <h2>Librarians</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Librarian-id</th>
+                        <th>First-Name</th>
+                        <th>Last-Name</th>
+                        <th>Gender</th>
+                        <th>Contact</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for librarian in librarians %}
+                    <tr>
+                        <td>{{ librarian.id }}</td>
+                        <td>{{ librarian.firstname }}</td>
+                        <td>{{ librarian.lastname }}</td>
+                        <td>{{ librarian.get_gender_display }}</td>
+                        <td>{{ librarian.contact }}</td>
+                        <td>{{ librarian.address|default:'—' }}</td>
+                        <td>{{ librarian.email }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="7">No librarians found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </section>
+
+    
+    
+
+</div>
+{% endblock %}
