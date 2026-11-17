@@ -20,7 +20,7 @@
             
         {% endif %}
 
-        <table class="table table-striped">
+        <div class="table-responsive"><table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">Member ID</th>
@@ -47,6 +47,6 @@
                 </tr>
                 {% endfor %}
         </tbody>
-        </table>
+        </table></div>
 <p><a href="{% url 'member_page' %}">Back to members</a></p>
 {% endblock %}

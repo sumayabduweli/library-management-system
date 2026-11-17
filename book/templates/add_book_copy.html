@@ -19,7 +19,7 @@
          {{ message }}
     {% endif %} 
 
-    <table class="table table-striped">
+    <div class="table-responsive"><table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">Copy ID</th>
@@ -40,7 +40,7 @@
             </tr>
             {% endfor %}
         </tbody>
-    </table>
+    </table></div>
 <p><a href="{% url 'book_copy_page' %}">Back to book copies</a></p>
 {% endblock %}
 

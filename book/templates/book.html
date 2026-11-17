@@ -9,7 +9,7 @@
     <a class="btn bg-gradient-dark text-white mb-3" href="{% url 'add_book_page' %}">Manage Books</a>
     <div class="dummy-data">
         <h2>Book List</h2>
-        <table>
+        <div class="table-responsive"><table>
             <thead>
                 <tr>
                     <th>BOOK-ID</th>
@@ -34,7 +34,7 @@
                 <tr><td colspan="6">No books found.</td></tr>
                 {% endfor %}
             </tbody>
-        </table>
+        </table></div>
 
     </div>
     
