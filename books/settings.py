@@ -94,6 +94,7 @@ WSGI_APPLICATION = 'books.wsgi.application'
 
 DATABASE_URL = (
     os.environ.get('DATABASE_URL')
+    or os.environ.get('DATABASE_DATABASE_URL')
     or os.environ.get('DATABASE_DATABASE_POSTGRES_PRISMA_URL')
     or os.environ.get('DATABASE_DATABASE_POSTGRES_URL_NON_POOLING')
     or os.environ.get('DATABASE_POSTGRES_PRISMA_URL')
