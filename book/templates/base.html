@@ -40,6 +40,50 @@
     }
 
     @media (max-width: 767.98px) {
+      .mobile-nav-toggle {
+        position: fixed;
+        z-index: 1060;
+        top: 0.75rem;
+        left: 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        border: 0;
+        border-radius: 0.65rem;
+        background: #344767;
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+      }
+
+      body.g-sidenav-pinned::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 1030;
+        background: rgba(0, 0, 0, .45);
+      }
+
+      #sidenav-main {
+        z-index: 1040;
+        transform: translateX(-15.5rem);
+        transition: transform .25s ease;
+      }
+
+      body.g-sidenav-pinned #sidenav-main {
+        transform: translateX(0);
+      }
+
+      #iconSidenav {
+        display: block !important;
+        z-index: 2;
+      }
+
+      .main-content {
+        padding-top: 3.5rem;
+      }
+
       #sidenav-collapse-main {
         width: 100% !important;
         max-width: 100%;
@@ -104,6 +148,9 @@
 
 <body class="g-sidenav-show  bg-gray-100">
   {% if request.path != '/sign-up/' and request.path != '/login/' and request.path != '/accounts/login/' %}
+  <button class="mobile-nav-toggle d-inline-flex d-md-none" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="sidenav-main" id="mobileNavToggle">
+    <span class="material-symbols-rounded" aria-hidden="true">menu</span>
+  </button>
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -152,6 +199,24 @@
   </main>
 
   <!--   Core JS Files   -->
+  <script>
+    (function () {
+      const toggle = document.getElementById('mobileNavToggle');
+      const close = document.getElementById('iconSidenav');
+      const closeMenu = function () {
+        document.body.classList.remove('g-sidenav-pinned');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      };
+      if (toggle) toggle.addEventListener('click', function () {
+        const open = document.body.classList.toggle('g-sidenav-pinned');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+      if (close) close.addEventListener('click', closeMenu);
+      document.addEventListener('click', function (event) {
+        if (document.body.classList.contains('g-sidenav-pinned') && event.target === document.body) closeMenu();
+      });
+    })();
+  </script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
