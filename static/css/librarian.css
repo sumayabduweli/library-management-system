@@ -41,6 +41,14 @@
     border-radius: 6px;
 }
 
+.library-page .Librarian-list {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
 .library-page label {
     display: block;
     margin-top: 10px;
@@ -101,5 +109,9 @@
 
     .library-page table {
         font-size: 14px;
+    }
+
+    .library-page .Librarian-list table {
+        min-width: 680px;
     }
 }
